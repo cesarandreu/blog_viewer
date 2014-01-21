@@ -28,7 +28,8 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 require('./lib/config/dummydata');
 
 // Enable github fetcher and database loader
-require('./lib/config/postLoader');
+//require('./lib/config/postLoader')(config.postLocation);
+require('./lib/config/repositoryFetcher')(config.postLocation, config.repository);
 
 // Passport Configuration
 require('./lib/config/passport')();
