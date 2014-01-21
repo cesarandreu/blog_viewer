@@ -29,7 +29,25 @@ require('./lib/config/dummydata');
 
 // Enable github fetcher and database loader
 //require('./lib/config/postLoader')(config.postLocation);
-require('./lib/config/repositoryFetcher')(config.postLocation, config.repository);
+//require('./lib/config/repositoryFetcher')(config.postLocation, config.repository);
+var repositoryFetcher = require('./lib/config/repositoryFetcher');
+var postLoader = require('./lib/config/postLoader');
+
+var fetch = function () {
+  (function (postLocation, repository) {
+    console.log('STARTING FETCH');
+    repositoryFetcher(postLocation, repository)
+    .then(function () {
+      postLoader(postLocation);
+    }).finally(function () {
+      console.log('FINISHED FETCH');
+    });
+  })(config.postLocation, config.repository);
+};
+fetch();
+
+// Run fetch once an hour
+var fetchInterval = setInterval(fetch, 60*60*1000);
 
 // Passport Configuration
 require('./lib/config/passport')();

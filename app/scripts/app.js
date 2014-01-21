@@ -43,20 +43,24 @@ angular.module('cesarandreuApp', [
             if (typeof page !== 'number' || page !== page || page < 1) {
               $location.path('/posts/1');
             } else {
-              Post.fetchList(page);
+              return Post.fetchList(page);
             }
           }]
         }
       })
       .when('/post/:title', {
         templateUrl: 'partials/post',
-        controller: 'PostCtrl'
+        controller: 'PostCtrl',
+        resolve: {
+          post: ['Post', '$route', function (Post, $route) {
+            return Post.fetch($route.current.params.title);
+          }]
+        }
       })
       .otherwise({
         redirectTo: '/'
       });
 
-    //$locationProvider.hashPrefix('!');
     $locationProvider.html5Mode(true);
 
     // Intercept 401s and 403s and redirect you to login
