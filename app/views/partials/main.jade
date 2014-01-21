@@ -1,0 +1,24 @@
+.row
+  .col-xs-12
+    .post
+      accordion(close-others='{{false}}', ng-show='posts.length > 0')
+        accordion-group(ng-repeat='post in posts', heading='{{post.title}}', is-open='true')
+          div.pull-right
+            a(ng-href='/posts/{{post.urlize}}') {{ post.createdAt | date:'EEE, d MMM yyyy HH:mm:ss' }}
+          div(marked='post.body')
+
+      div(ng-hide='posts.length > 0')
+        h3 Nothing here. Sorry :(.
+
+.row
+  .col-xs-12
+    ul.pager
+      li.previous(ng-hide='previousPage < 1')
+        a(ng-href='/posts?page={{previousPage}}')
+          span.glyphicon.glyphicon-chevron-left
+          | Previous
+      li.next(ng-hide='posts.length < 5')
+        a(ng-href='/posts?page={{nextPage}}')
+          | Next
+          span.glyphicon.glyphicon-chevron-right
+

@@ -1,0 +1,16 @@
+.row
+  .col-xs-12
+      .panel.panel-default.post(ng-if='post.title.length > 0')
+        .panel-heading
+          h3.panel-title {{post.title}}
+        .panel-body
+          div.pull-right
+            a(ng-href='/posts/{{post.urlize}}') {{ post.createdAt | date:'EEE, d MMM yyyy HH:mm:ss' }}
+          div(marked='post.body')
+          hr
+          div(disqus="post.urlize")
+
+      div(ng-hide='post.title.length > 0')
+        h3(ng-hide='alerts.length > 0') There appears to be nothing here :(.
+        alert(ng-repeat='alert in alerts', type='alert.type', close='closeAlert($index)')
+          | {{alert.msg}}
