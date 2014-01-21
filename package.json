@@ -1,6 +1,10 @@
 {
   "name": "cesarandreu",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cesarandreu/blog_viewer"
+  },
   "dependencies": {
     "express": "~3.4.3",
     "lodash": "~2.4.1",
