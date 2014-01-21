@@ -358,6 +358,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
+      return grunt.task.run(['build', 'express:prod', 'express-keepalive']);
+    }
+
+    if (target === 'localdist') {
       return grunt.task.run(['build', 'express:prod', 'open', 'express-keepalive']);
     }
 
