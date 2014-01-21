@@ -9,7 +9,6 @@ angular.module('cesarandreuApp')
     if (page > 0) {
       currentPage = page;
     }
-    Post.fetchList(currentPage);
 
     $scope.previousPage = currentPage - 1;
     $scope.nextPage = currentPage ? currentPage + 1 : currentPage + 2;

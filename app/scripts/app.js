@@ -14,7 +14,12 @@ angular.module('cesarandreuApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+          posts: ['Post', function(Post) {
+            Post.fetchList(0);
+          }]
+        }
       })
       .when('/login', {
         templateUrl: 'partials/login',
@@ -29,11 +34,21 @@ angular.module('cesarandreuApp', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
-      .when('/posts', {
+      .when('/posts/:page', {
         templateUrl: 'partials/main',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+          posts: ['Post', '$route', '$location', function(Post, $route, $location) {
+            var page = parseInt($route.current.params.page, 10);
+            if (typeof page !== 'number' || page !== page || page < 1) {
+              $location.path('/posts/1');
+            } else {
+              Post.fetchList(page);
+            }
+          }]
+        }
       })
-      .when('/posts/:title', {
+      .when('/post/:title', {
         templateUrl: 'partials/post',
         controller: 'PostCtrl'
       })
@@ -60,7 +75,6 @@ angular.module('cesarandreuApp', [
     }]);
 
     $disqusProvider.setShortname('cesarandreu-blog');
-
   })
   .run(function ($rootScope, $location, Auth) {
 

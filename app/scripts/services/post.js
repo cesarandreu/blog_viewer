@@ -16,7 +16,7 @@ angular.module('cesarandreuApp')
       }
 
       var deferred = $q.defer();
-      $http.get('/api/posts?page='+page)
+      $http.get('/api/posts/'+page)
         .success(function(postList) {
           angular.copy(postList, list);
           deferred.resolve(list);
@@ -49,7 +49,7 @@ angular.module('cesarandreuApp')
       }
 
       var deferred = $q.defer();
-      $http.get('/api/posts/'+name)
+      $http.get('/api/post/'+name)
         .success(function(post) {
           if (typeof post === 'object') {
             deferred.resolve(set(name, post));

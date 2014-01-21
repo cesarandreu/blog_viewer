@@ -4,7 +4,7 @@
       accordion(close-others='{{false}}', ng-show='posts.length > 0')
         accordion-group(ng-repeat='post in posts', heading='{{post.title}}', is-open='true')
           div.pull-right
-            a(ng-href='/posts/{{post.urlize}}') {{ post.createdAt | date:'EEE, d MMM yyyy HH:mm:ss' }}
+            a(ng-href='/post/{{post.urlize}}') {{ post.createdAt | date:'EEE, d MMM yyyy HH:mm:ss' }}
           div(marked='post.body')
 
       div(ng-hide='posts.length > 0')
@@ -14,11 +14,11 @@
   .col-xs-12
     ul.pager
       li.previous(ng-hide='previousPage < 1')
-        a(ng-href='/posts?page={{previousPage}}')
+        a(ng-href='/posts/{{previousPage}}')
           span.glyphicon.glyphicon-chevron-left
           | Previous
       li.next(ng-hide='posts.length < 5')
-        a(ng-href='/posts?page={{nextPage}}')
+        a(ng-href='/posts/{{nextPage}}')
           | Next
           span.glyphicon.glyphicon-chevron-right
 
