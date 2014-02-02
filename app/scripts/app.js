@@ -16,7 +16,8 @@ angular.module('cesarandreuApp', [
         templateUrl: 'partials/main',
         controller: 'MainCtrl',
         resolve: {
-          posts: ['Post', function(Post) {
+          posts: ['Post', 'Title', function(Post, Title) {
+            Title.set();
             Post.fetchList(0);
           }]
         }
@@ -25,8 +26,9 @@ angular.module('cesarandreuApp', [
         templateUrl: 'partials/main',
         controller: 'MainCtrl',
         resolve: {
-          posts: ['Post', '$route', '$location', function(Post, $route, $location) {
+          posts: ['Post', 'Title', '$route', '$location', function(Post, Title, $route, $location) {
             var page = parseInt($route.current.params.page, 10);
+            Title.set('Page ' + page);
             if (typeof page !== 'number' || page !== page || page < 1) {
               $location.path('/posts/1');
             } else {
@@ -45,7 +47,12 @@ angular.module('cesarandreuApp', [
         }
       })
       .when('/about', {
-        templateUrl: 'partials/about'
+        templateUrl: 'partials/about',
+        resolve: {
+          title: ['Title', function (Title) {
+            Title.set('About');
+          }]
+        }
       })
       .otherwise({
         redirectTo: '/'
