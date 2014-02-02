@@ -7,7 +7,9 @@ angular.module('cesarandreuApp', [
   'ngRoute',
   'hc.marked',
   'ui.bootstrap',
-  'ngDisqus'
+  'ngDisqus',
+  'angulartics',
+  'angulartics.google.analytics'
 ])
   .constant('_', _)
   .config(function ($routeProvider, $locationProvider, $httpProvider, $disqusProvider) {
@@ -21,19 +23,19 @@ angular.module('cesarandreuApp', [
           }]
         }
       })
-      .when('/login', {
-        templateUrl: 'partials/login',
-        controller: 'LoginCtrl'
-      })
-      .when('/signup', {
-        templateUrl: 'partials/signup',
-        controller: 'SignupCtrl'
-      })
-      .when('/settings', {
-        templateUrl: 'partials/settings',
-        controller: 'SettingsCtrl',
-        authenticate: true
-      })
+      // .when('/login', {
+      //   templateUrl: 'partials/login',
+      //   controller: 'LoginCtrl'
+      // })
+      // .when('/signup', {
+      //   templateUrl: 'partials/signup',
+      //   controller: 'SignupCtrl'
+      // })
+      // .when('/settings', {
+      //   templateUrl: 'partials/settings',
+      //   controller: 'SettingsCtrl',
+      //   authenticate: true
+      // })
       .when('/posts/:page', {
         templateUrl: 'partials/main',
         controller: 'MainCtrl',

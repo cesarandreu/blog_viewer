@@ -36,11 +36,11 @@ html.no-js
       div.container(ng-view)
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
-    //- script.
-    //-   var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    //-   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    //-   g.src='//www.google-analytics.com/ga.js';
-    //-   s.parentNode.insertBefore(g,s)}(document,'script'));
+    script.
+      var _gaq=[['_setAccount','UA-20550824-2'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src='//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
 
     <!-- build:js(app) scripts/vendor.js -->
     <!-- bower:js -->
@@ -54,6 +54,8 @@ html.no-js
     <script src="bower_components/angular-marked/angular-marked.js"></script>
     <script src="bower_components/lodash/dist/lodash.js"></script>
     <script src="bower_components/angular-disqus/angular-disqus.js"></script>
+    <script src="bower_components/angulartics/src/angulartics.js"></script>
+    <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
