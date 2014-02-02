@@ -15,7 +15,8 @@
     "passport-local": "latest",
     "jade": "latest",
     "async": "~0.2.9",
-    "q": "~1.0.0"
+    "q": "~1.0.0",
+    "bower": "~1.2.8"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -64,6 +65,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
+    "postinstall": "./node_modules/.bin/bower install",
     "test": "grunt test"
   }
 }
