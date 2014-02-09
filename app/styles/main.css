@@ -135,3 +135,7 @@ border-bottom-color: transparent;
 .ng-leave.ng-leave-active {
   left:-200%;
 }
+
+.growl {
+  top: 60px;
+}

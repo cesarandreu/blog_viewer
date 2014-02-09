@@ -1,73 +1,57 @@
 'use strict';
 
 angular.module('cesarandreuApp')
-  .service('Post', function Post($http, $q) {
+.service('Post', function Post(ModelFetcher, $angularCacheFactory, _) {
 
-    var list = [];
-    var post = {};
-
-    var getList = function() {
-      return list;
-    };
-
-    var fetchList = function(page) {
-      if (typeof page !== 'number' || page < 0 || page !== page) {
-        page = 0;
-      }
-
-      var deferred = $q.defer();
-      $http.get('/api/posts/'+page)
-        .success(function(postList) {
-          angular.copy(postList, list);
-          deferred.resolve(list);
-        })
-        .error(function(err) {
-          console.log('Error: ', err);
-          deferred.reject(err);
-        });
-
-      return deferred.promise;
-    };
-
-    var get = function(name) {
-      if (typeof post[name] !== 'object') {
-        post[name] = {};
-      }
-      return post[name];
-    };
-
-    var set = function(name, value) {
-      if (typeof post[name] !== 'object') {
-        post[name] = {};
-      }
-      return angular.copy(value, post[name]);
-    };
-
-    var fetch = function(name) {
-      if (typeof name !== 'string' || name.length < 1) {
-        name = ' ';
-      }
-
-      var deferred = $q.defer();
-      $http.get('/api/post/'+name)
-        .success(function(post) {
-          if (typeof post === 'object') {
-            deferred.resolve(set(name, post));
-          } else {
-            deferred.reject('Post does not exist.');
-          }
-
-        })
-        .error(function(err) {
-          deferred.reject(err);
-        });
-      return deferred.promise;
-    };
-
-    return {
-      fetchList: fetchList,
-      getList: getList,
-      get: get,
-      fetch: fetch
-    };
+  var index = new ModelFetcher({
+    url: function (params) {
+      return '/api/posts/' + params.page;
+    },
+    link: function (params) {
+      return '/posts/'+params.page;
+    },
+    validate: function (params) {
+      params = params || {};
+      params.page = parseInt(params.page, 10);
+      return _.isNumber(params.page) && params.page > 0;
+    },
+    modelToParameters: function (model) {
+      return {
+        page: model.page
+      };
+    },
+    cache: $angularCacheFactory('PostIndex', {
+      capacity: 5,
+      storageMode: 'localStorage'
+    })
   });
+
+  var show = new ModelFetcher({
+    url: function (params) {
+      return '/api/post/' + params.title;
+    },
+    link: function (params) {
+      return '/post/' + params.title;
+    },
+    validate: function (params) {
+      params = params || {};
+      return _.isString(params.title) && params.title.length > 0;
+    },
+    modelToParameters: function (model) {
+      return {
+        title: model.urlize
+      };
+    },
+    cache: $angularCacheFactory('PostShow', {
+      capacity: 5,
+      storageMode: 'localStorage'
+    })
+  });
+
+  return {
+    index: index,
+    show: show
+  };
+
+
+});

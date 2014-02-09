@@ -6,6 +6,7 @@ doctype html
 html.no-js
   //<![endif]
   head
+    meta(name="fragment", content="!")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
     base(href="/")
@@ -16,6 +17,7 @@ html.no-js
     <!-- build:css(app) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-growl/build/angular-growl.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -31,11 +33,13 @@ html.no-js
       <![endif]
 
     // Add your site or application content here
+
     include partials/navbar
     div(role='main')
       div.container
         div(ng-view)
 
+    div(growl)
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -53,8 +57,11 @@ html.no-js
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-marked/angular-marked.js"></script>
+    <script src="bower_components/angular-cache/dist/angular-cache.js"></script>
+    <script src="bower_components/angular-growl/build/angular-growl.js"></script>
     <script src="bower_components/lodash/dist/lodash.js"></script>
     <script src="bower_components/angular-disqus/angular-disqus.js"></script>
+    <script src="bower_components/angular-promise-tracker/promise-tracker.js"></script>
     <script src="bower_components/angulartics/src/angulartics.js"></script>
     <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
     <!-- endbower -->
@@ -65,6 +72,7 @@ html.no-js
     <script src="scripts/controllers/navbar.js"></script>
     <script src="scripts/controllers/post.js"></script>
     <script src="scripts/filters/urlize.js"></script>
+    <script src="scripts/services/ModelFetcher.js"></script>
     <script src="scripts/services/post.js"></script>
     <script src="scripts/services/title.js"></script>
     <!-- endbuild -->
