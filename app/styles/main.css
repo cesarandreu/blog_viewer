@@ -6,7 +6,8 @@ body {
 }
 
 .ng-cloak {
-    opacity: 0;
+  opacity: 0;
+  display: none !important;
 }
 
 .ng-invalid {
