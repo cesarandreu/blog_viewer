@@ -8,10 +8,10 @@ header.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl')
           span.icon-bar
           span.icon-bar
         a.navbar-brand.visible-xs(href='/') cesarandreu
-      nav.hidden-xs.ng-cloak
+      nav.hidden-xs
         ul.nav.navbar-nav
           a.navbar-brand(href='/', role='button') cesarandreu
-          li(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
+          li.ng-cloak(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
             a(ng-href='{{item.link}}') {{item.title}}
       nav.visible-xs.ng-cloak(collapse='!isCollapsed')
         ul.nav.navbar-nav
