@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('cesarandreuApp')
-  .controller('MainCtrl', function (Title) {
+  .controller('AboutCtrl', function (Title) {
     Title.set('About me');
   });
