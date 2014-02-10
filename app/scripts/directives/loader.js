@@ -2,7 +2,6 @@
 
 angular.module('cesarandreuApp')
 .directive('caLoader', function (promiseTracker) {
-  console.log('caLoader');
   return {
     template: '<div ng-if="loading.active()" ng-transclude></div>',
     transclude: true,
