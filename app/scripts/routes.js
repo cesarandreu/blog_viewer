@@ -1,62 +1,64 @@
 'use strict';
 
 angular.module('cesarandreuApp')
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        name: 'default',
-        templateUrl: 'partials/main',
-        controller: 'MainCtrl',
-        resolve: {
-          data: ['Post', function(Post) {
-            return Post.index.routeGet({
-              page: 1
-            });
-          }]
-        }
-      })
-      .when('/posts/:page', {
-        name: 'page',
-        templateUrl: 'partials/main',
-        controller: 'MainCtrl',
-        resolve: {
-          data: ['Post', '$route', function(Post, $route) {
-            return Post.index.routeGet($route.current.params);
-          }]
-        }
-      })
-      .when('/post/:title', {
-        name: 'title',
-        templateUrl: 'partials/post',
-        controller: 'PostCtrl',
-        resolve: {
-          post: ['Post', '$route', function (Post, $route) {
-            return Post.show.routeGet($route.current.params);
-          }]
-        }
-      })
-      .when('/about', {
-        name: 'About me',
-        templateUrl: 'partials/about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+  .config(function ($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'partials/main',
+      controller: 'MainCtrl',
+      resolve: {
+        data: ['Post', function (Post) {
+          return Post.index.routeGet({
+            page: 1
+          });
+        }]
+      }
+    })
+    .state('posts', {
+      url: '/posts/:page',
+      templateUrl: 'partials/main',
+      controller: 'MainCtrl',
+      resolve: {
+        data: ['Post', '$stateParams', function (Post, $stateParams) {
+          return Post.index.routeGet($stateParams);
+        }]
+      }
+    })
+    .state('post', {
+      url: '/post/:title',
+      templateUrl: 'partials/post',
+      controller: 'PostCtrl',
+      resolve: {
+        post: ['Post', '$stateParams', function (Post, $stateParams) {
+          return Post.show.routeGet($stateParams);
+        }]
+      }
+    })
+    .state('about', {
+      url: '/about',
+      templateUrl: 'partials/about',
+      controller: 'AboutCtrl'
+    });
+
   })
 
-  .run(function ($rootScope, $location, $log, growl) {
-    $rootScope.$on('$routeChangeError', function(angularEvent, current, previous, rejection) {
-      $log.warn('Route change error.', angularEvent, current, previous, rejection);
+  .run(function ($rootScope, $state, $log, growl) {
+    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+      $log.warn('Route change error.', event, toState, toParams, fromState, fromParams, error);
 
-      if (typeof rejection === 'string' && rejection.length > 0) {
-        growl.addErrorMessage(rejection);
+      if (typeof error === 'string' && error.length > 0) {
+        growl.addErrorMessage(error);
       }
 
-      if (previous && previous.$$route && previous.$$route.originalPath) {
-        $location.path(previous.$$route.originalPath);
+      if (fromState.name) {
+        $state.go(name);
       }
       else {
-        $location.path('/');
+        $state.go('home');
       }
     });
 

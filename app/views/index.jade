@@ -35,9 +35,9 @@ html.no-js
     // Add your site or application content here
 
     include partials/navbar
-    div(role='main')
-      div.container
-        div(ng-view)
+    .container
+      .ui-view-container
+        div(ui-view)
 
     div(growl)
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
@@ -46,7 +46,6 @@ html.no-js
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
       ga('create', 'UA-20550824-2', 'cesarandreu.com');
 
     <!-- build:js(app) scripts/vendor.js -->
@@ -54,7 +53,7 @@ html.no-js
     <script src="bower_components/marked/lib/marked.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-marked/angular-marked.js"></script>
     <script src="bower_components/angular-cache/dist/angular-cache.js"></script>

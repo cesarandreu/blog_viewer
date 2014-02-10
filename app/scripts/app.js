@@ -2,7 +2,7 @@
 
 angular.module('cesarandreuApp', [
   'ngAnimate',
-  'ngRoute',
+  'ui.router',
   'hc.marked',
   'ui.bootstrap',
   'ngDisqus',
@@ -13,9 +13,10 @@ angular.module('cesarandreuApp', [
   'angulartics.google.analytics'
 ])
   .constant('_', _)
-  .config(function ($locationProvider, $disqusProvider, growlProvider, $httpProvider) {
+  .config(function ($locationProvider, $disqusProvider, growlProvider, $httpProvider, $analyticsProvider) {
     $locationProvider.html5Mode(true);
     $disqusProvider.setShortname('cesarandreu-blog');
     $httpProvider.responseInterceptors.push(growlProvider.serverMessagesInterceptor);
     growlProvider.globalTimeToLive(5000);
+    $analyticsProvider.firstPageview(false);
   });
