@@ -7,7 +7,6 @@ angular.module('cesarandreuApp')
     $scope.isCollapsed = false;
 
     $scope.toggleIsCollapsed = function () {
-      console.log('TOGGLING!~');
       $scope.isCollapsed = !$scope.isCollapsed;
     };
 

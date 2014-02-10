@@ -19,8 +19,13 @@ angular.module('cesarandreuApp')
       return value;
     };
 
+    var getDefault = function () {
+      return defaultValue;
+    };
+
     return {
       set: set,
-      get: get
+      get: get,
+      getDefault: getDefault
     };
   });

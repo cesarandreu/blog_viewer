@@ -4,6 +4,7 @@ angular.module('cesarandreuApp')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
+        name: 'default',
         templateUrl: 'partials/main',
         controller: 'MainCtrl',
         resolve: {
@@ -15,6 +16,7 @@ angular.module('cesarandreuApp')
         }
       })
       .when('/posts/:page', {
+        name: 'page',
         templateUrl: 'partials/main',
         controller: 'MainCtrl',
         resolve: {
@@ -24,6 +26,7 @@ angular.module('cesarandreuApp')
         }
       })
       .when('/post/:title', {
+        name: 'title',
         templateUrl: 'partials/post',
         controller: 'PostCtrl',
         resolve: {
@@ -33,12 +36,8 @@ angular.module('cesarandreuApp')
         }
       })
       .when('/about', {
-        templateUrl: 'partials/about',
-        resolve: {
-          title: ['Title', function (Title) {
-            Title.set('About');
-          }]
-        }
+        name: 'About me',
+        templateUrl: 'partials/about'
       })
       .otherwise({
         redirectTo: '/'
